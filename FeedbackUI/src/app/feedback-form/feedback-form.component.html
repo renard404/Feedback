@@ -1,0 +1,76 @@
+<p>feedback-form works!</p>
+<div class="container">
+    <div class="card-body">
+        <h5 class="card-title">Feedback Form</h5>
+        <form>
+            <div class="row">
+                <div class="col-lg-6">
+                    <mat-form-field>
+                        <input matInput placeholder="Company Name" [(ngModel)]=feedback.companyName
+                            [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                    <mat-form-field>
+                        <input matInput placeholder="Project Name" [(ngModel)]=feedback.projectName
+                            [ngModelOptions]="{standalone: true}">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-7">
+                    <label>Would you use our services again and recommend us to your colleagues?</label>
+                </div>
+                <div class="col-lg-5">
+                    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                        [(ngModel)]=feedback.willRecommend [ngModelOptions]="{standalone: true}">
+                        <mat-radio-button class="example-radio-button" [value]=true>
+                            Yes
+                        </mat-radio-button>
+                        <mat-radio-button class="example-radio-button" [value]=false>
+                            No
+                        </mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+            <div>
+                <div>Rate us on the scale of 1-10</div>
+                <mat-slider min="0" max="10" step="1" value="0" [(ngModel)]=feedback.rating
+                    [ngModelOptions]="{standalone: true}"></mat-slider>
+                <span>You rated: {{feedback.rating}}</span>
+            </div>
+            <ng-container *ngIf="isWentWrong">
+                <h5>What went Wrong?</h5>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <button mat-raised-button color={{buttonSelected.projectManager}} (click)=checkProjectManager()>Project Manager</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button mat-raised-button color={{buttonSelected.crew}} (click)=checkCrew()>Crew</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button mat-raised-button color={{buttonSelected.qualityOfWork}} (click)=checkQualityOfWork()>Quality Of Work</button>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <button mat-raised-button color={{buttonSelected.speedAndDelivery}} (click)=checkSpeedAndDelivery()>Speed And Delivery</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <button mat-raised-button color={{buttonSelected.pricing}} (click)=checkPricing()>Pricing</button>
+                    </div>
+                    <div class="col-lg-2">
+                        <mat-form-field>
+                            <input matInput placeholder="Other" [(ngModel)]=feedback.wentWrong.other
+                                [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                    </div>
+                </div>
+                
+            </ng-container>
+            <button mat-raised-button type="submit" (click)=submitFeedback()>Submit</button>
+        </form>
+    </div>
+
+</div>
